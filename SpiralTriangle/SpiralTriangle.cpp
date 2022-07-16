@@ -16,13 +16,13 @@ std::vector<Vector2i> imageToPoints(const Image& img, const int& points) {
     
     for (int i = 0; i < points; ++i) {
         // Random point inside image dimensions
-        Vector2i p = Vector2i(rand() % width, rand() % height);
+        Vector2i randPoint = Vector2i(rand() % width, rand() % height);
         // While point is on a transparent pixel
-        while (img.getPixel(p.x, p.y).a == 0) {
+        while (img.getPixel(randPoint.x, randPoint.y).a == 0) {
             // Assign point to new random point inside image dimensions
-            p = Vector2i(rand() % width, rand() % height);
+            randPoint = Vector2i(rand() % width, rand() % height);
         }
-        pointArray.emplace_back(p);
+        pointArray.emplace_back(randPoint);
     }
 
     return pointArray;
@@ -83,18 +83,18 @@ int main() {
         };
 
         // Distance between points allowed before hiding the line
-        float distance = 150.f;
+        float distanceSquared = 150.f * 150.f;
         // Get distance of all lines
-        float l1 = distSquared(points[0], points[1]);
-        float l2 = distSquared(points[1], points[2]);
-        float l3 = distSquared(points[2], points[0]);
+        float line1 = distSquared(points[0], points[1]);
+        float line2 = distSquared(points[1], points[2]);
+        float line3 = distSquared(points[2], points[0]);
         
         // Get the largest line
-        float triangleLargestDist = fmaxf(l1, fmaxf(l2, l3));
+        float triangleLargestDist = fmaxf(line1, fmaxf(line2, line3));
 
         // If the largest line is over the max distance, skip the entire triangle
         // (If we only skipped the largest line, it would lead to open triangles)
-        if (triangleLargestDist > distance * distance) {
+        if (triangleLargestDist > distanceSquared) {
             continue;
         }
 
