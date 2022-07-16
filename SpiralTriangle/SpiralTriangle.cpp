@@ -6,17 +6,21 @@ using namespace sf;
 
 
 std::vector<Vector2i> imageToPoints(const Image& img, const int& points) {
+    const int width = img.getSize().x;
+    const int height = img.getSize().y;
+
+
     // Vector to store points in
     std::vector<Vector2i> pointArray;
     pointArray.reserve(points);
     
     for (int i = 0; i < points; ++i) {
         // Random point inside image dimensions
-        Vector2i p = Vector2i(rand() % img.getSize().x, rand() % img.getSize().y);
+        Vector2i p = Vector2i(rand() % width, rand() % height);
         // While point is on a transparent pixel
         while (img.getPixel(p.x, p.y).a == 0) {
             // Assign point to new random point inside image dimensions
-            p = Vector2i(rand() % img.getSize().x, rand() % img.getSize().y);
+            p = Vector2i(rand() % width, rand() % height);
         }
         pointArray.emplace_back(p);
     }
@@ -37,8 +41,9 @@ const std::vector<double> getCoords(const std::vector<Vector2i>& particles) {
     return coords;
 }
 
-float distSquared(const Vector2f& p1, const Vector2f& p2) {
-    // ((x2-x1)^2 + (y1-y2)^2)^.5
+inline float distSquared(const Vector2f& p1, const Vector2f& p2) {
+    // Distance between two points without the square root (helps performance)
+    // ((x2-x1)^2 + (y1-y2)^2)
     return ((p2.x - p1.x) * (p2.x - p1.x)) + ((p2.y - p1.y) * (p2.y - p1.y));
 }
 
