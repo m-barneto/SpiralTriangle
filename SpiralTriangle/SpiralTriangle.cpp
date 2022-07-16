@@ -56,7 +56,7 @@ float distSquared(const Vector2f& p1, const Vector2f& p2) {
 
 int main() {
     printf("Enter the image filepath: ");
-    std::string imagepath = "C:\\Code\\C++\\SpiralTriangle\\x64\\Debug\\Daedra_heart.png";
+    std::string imagepath = "test_image.png";
     //std::getline(std::cin, imagepath);
     srand(time(NULL));
     Image img;
