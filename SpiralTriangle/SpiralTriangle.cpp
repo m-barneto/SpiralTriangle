@@ -144,8 +144,8 @@ int main() {
         vertices.push_back(Vertex(points[0], img.getPixel(points[0].x, points[0].y)));
     }
 
-    int iterations = 32;
-    float t = 1.f / 18.f;
+    int iterations = 64;
+    float t = 1.f / 16.f;
 
     CircleShape c(50.f);
 
