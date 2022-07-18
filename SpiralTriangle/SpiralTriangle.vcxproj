@@ -145,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="delaunator.hpp" />
+    <ClInclude Include="poisson_disk_sampling.h" />
+    <ClInclude Include="ScaledImage.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="test_image.png">
